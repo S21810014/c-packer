@@ -1,11 +1,14 @@
 /*
  * Timothy Merfry Tiwow. March 16, 2021
+ *
+ * rev March 17, 2021
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 void packIt(char *filename) {
 	char **fileBytes;
@@ -38,6 +41,16 @@ void packIt(char *filename) {
 
 		struct stat st;
 		stat(pathname, &st); //acquire filesize
+		if(errno == ENOENT) {
+			printf("ERROR: File doesn't exist\n");
+			return;
+		}
+
+		if(S_ISDIR(st.st_mode)) {
+			printf("ERROR: You specified a directory\n");
+			return;
+		}
+
 		int fileByteSize = st.st_size;
 
 		printf("file byte size: %d\n", fileByteSize);
