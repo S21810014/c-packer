@@ -23,7 +23,7 @@ void packIt(char *filename) {
 	fileNames = (char**) calloc(sizeof(char*), numOfFiles);
 
 	char temp;			//catch the trailing- 
-	scanf("%c", &temp); //newline from scanf
+	scanf("%c", &temp);	//newline from scanf
 
 	int i;
 	totalBytesToWrite = 0;
